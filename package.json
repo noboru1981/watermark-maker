@@ -1,5 +1,5 @@
 {
-  "name": "watermark",
+  "name": "watermark-maker",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
