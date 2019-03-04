@@ -7,7 +7,9 @@ class DrawArea extends Component {
     render() {
         return (
             <div>
-                <canvas></canvas>
+                <label htmlFor="fileSelector">
+                    <canvas ></canvas>
+                </label>
             </div>
         );
     }
