@@ -29,6 +29,9 @@ class FileSelector extends Component {
      * @param event
      */
     fileChangeHandler(event) {
+        event.preventDefault();
+        event.stopPropagation();
+
         const file = event.target.files[0];
 
         this.setState(() => {
