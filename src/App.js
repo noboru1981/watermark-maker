@@ -1,28 +1,82 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {Component} from 'react';
+import DrawArea from "./components/DrawArea";
+import FileSelector from "./components/FileSelector";
 
 class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
-  }
+    constructor(props) {
+        super(props);
+        this.state = {
+            file: false,
+            imgSize: {
+                height: 0,
+                width: 0
+            }
+        }
+
+        this.fileChangeHandler = this.fileChangeHandler.bind(this);
+    }
+
+    fileChangeHandler(event) {
+        const file = event.target.files[0];
+
+        // chromeはダイアログを閉じるとファイル選択が解除されるので空値セット
+        if (!file) {
+            this.setState((currentState) => {
+                const newState = currentState;
+                newState.file = new Blob();
+                newState.imgSize = {
+                    height: 0,
+                    width: 0
+                }
+
+                return newState;
+            });
+            return;
+        }
+
+        const allowedFileTypes = ["image/png", "image/jpeg", "image/gif"];
+        const isImageSelected = allowedFileTypes.indexOf(file.type) > -1;
+        const img = new Image();
+
+        if (isImageSelected) {
+            img.onload = () => {
+                this.setState((currentState)=> {
+                    let newState = currentState;
+                    newState.imgSize = {
+                        height: img.naturalHeight,
+                        width: img.naturalWidth
+                    }
+                    return newState;
+                });
+
+            }
+            img.src = URL.createObjectURL(file);
+        }
+
+        this.setState((currentState) => {
+            const newState = currentState;
+            if (isImageSelected) {
+                newState.file = file;
+            } else {
+                newState.file = new Blob();
+            }
+
+            return newState;
+        });
+    }
+
+    render() {
+        return (
+            <div className="App">
+                <div className="container">
+                    <DrawArea image={this.state.file}
+                              width={this.state.imgSize.width}
+                              height={this.state.imgSize.height} />
+                    <FileSelector onChange={this.fileChangeHandler}/>
+                </div>
+            </div>
+        );
+    }
 }
 
 export default App;
