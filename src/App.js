@@ -1,10 +1,11 @@
-import React, {Component} from 'react';
-import DrawArea from "./components/DrawArea";
-import FileSelector from "./components/FileSelector";
+import React, {Component} from 'react'
+import {Container, Row, Col} from 'react-bootstrap'
+import DrawArea from "./components/DrawArea"
+import FileSelector from "./components/FileSelector"
 
 class App extends Component {
     constructor(props) {
-        super(props);
+        super(props)
         this.state = {
             file: false,
             imgSize: {
@@ -13,70 +14,74 @@ class App extends Component {
             }
         }
 
-        this.fileChangeHandler = this.fileChangeHandler.bind(this);
+        this.fileChangeHandler = this.fileChangeHandler.bind(this)
     }
 
     fileChangeHandler(event) {
-        const file = event.target.files[0];
+        const file = event.target.files[0]
 
         // chromeはダイアログを閉じるとファイル選択が解除されるので空値セット
         if (!file) {
             this.setState((currentState) => {
-                const newState = currentState;
-                newState.file = new Blob();
+                const newState = currentState
+                newState.file = new Blob()
                 newState.imgSize = {
                     height: 0,
                     width: 0
                 }
 
-                return newState;
-            });
-            return;
+                return newState
+            })
+            return
         }
 
-        const allowedFileTypes = ["image/png", "image/jpeg", "image/gif"];
-        const isImageSelected = allowedFileTypes.indexOf(file.type) > -1;
-        const img = new Image();
+        const allowedFileTypes = ["image/png", "image/jpeg", "image/gif"]
+        const isImageSelected = allowedFileTypes.indexOf(file.type) > -1
+        const img = new Image()
 
         if (isImageSelected) {
             img.onload = () => {
-                this.setState((currentState)=> {
-                    let newState = currentState;
+                this.setState((currentState) => {
+                    let newState = currentState
                     newState.imgSize = {
                         height: img.naturalHeight,
                         width: img.naturalWidth
                     }
-                    return newState;
-                });
+                    return newState
+                })
 
             }
-            img.src = URL.createObjectURL(file);
+            img.src = URL.createObjectURL(file)
         }
 
         this.setState((currentState) => {
-            const newState = currentState;
+            const newState = currentState
             if (isImageSelected) {
-                newState.file = file;
+                newState.file = file
             } else {
-                newState.file = new Blob();
+                newState.file = false
             }
 
-            return newState;
-        });
+            return newState
+        })
     }
 
     render() {
         return (
-            <div className="App">
-                <div className="container">
-                    <DrawArea image={this.state.file}
-                              width={this.state.imgSize.width}
-                              height={this.state.imgSize.height} />
-                    <FileSelector onChange={this.fileChangeHandler}/>
-                </div>
-            </div>
-        );
+            <Container className="App">
+                <Row className="">
+                    <Col>
+                        <DrawArea image={this.state.file}
+                                  width={this.state.imgSize.width}
+                                  height={this.state.imgSize.height}/>
+                    </Col>
+                    <Col>
+                        <FileSelector onChange={this.fileChangeHandler}/>
+                    </Col>
+                </Row>
+            </Container>
+        )
     }
 }
 
-export default App;
+export default App
