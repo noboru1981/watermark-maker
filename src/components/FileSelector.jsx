@@ -14,7 +14,7 @@ class FileSelector extends Component {
 
         this.state = {
             fileName: ""
-        }
+        };
 
         this.file = React.createRef();
         this.fileName = React.createRef();
@@ -70,19 +70,22 @@ class FileSelector extends Component {
                               ref={this.file}
                               style={{display: "none"}}
                 />
-                <InputGroup as={"label"} htmlFor={"fileSelector"} className="mb-3">
-                    <InputGroup.Prepend onClick={this.fileSelectHandler}>
-                        <Button id={'selectButton'}
-                                ref={this.button}>Select Image</Button>
-                    </InputGroup.Prepend>
-                    <FormControl aria-describedby="basic-addon1"
-                                 id={'filename'}
-                                 ref={this.fileName}
-                                 readOnly={true}
-                                 onClick={this.fileSelectHandler}
-                                 value={this.state.fileName}
-                    />
-                </InputGroup>
+                <Form.Group controlId="formFileSelect">
+                    <Form.Label>画像ファイル</Form.Label>
+                    <InputGroup as={"label"} htmlFor={"fileSelector"} className="mb-3">
+                        <InputGroup.Prepend onClick={this.fileSelectHandler}>
+                            <Button id={"selectButton"}
+                                    ref={this.button}>Select Image</Button>
+                        </InputGroup.Prepend>
+                        <FormControl aria-describedby="basic-addon1"
+                                     id={"filename"}
+                                     ref={this.fileName}
+                                     readOnly={true}
+                                     onClick={this.fileSelectHandler}
+                                     value={this.state.fileName}
+                        />
+                    </InputGroup>
+                </Form.Group>
             </div>
         );
     }
