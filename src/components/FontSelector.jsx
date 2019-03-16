@@ -1,8 +1,8 @@
 import React, {Component} from "react";
 
 const fonts = [
-    {value: "serif", label: "serif"},
-    {value: "sans-serif", label: "sans-serif"}
+    {value: "YuMincho", label: "游明朝"},
+    {value: "YuGothic", label: "游ゴシック"}
 ];
 
 /**

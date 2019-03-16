@@ -1,8 +1,8 @@
 import React, {Component} from "react";
-import {InputGroup, Form, FormControl, Button} from "react-bootstrap";
+import {Form} from "react-bootstrap";
 
 /**
- * ファイルセレクタ
+ * テキスト入力ボックス
  */
 class TextInput extends Component {
 
@@ -10,7 +10,7 @@ class TextInput extends Component {
         return (
             <Form.Group controlId="formTextInput">
                 <Form.Label>表示するテキスト</Form.Label>
-                <Form.Control type={"text"}/>
+                <Form.Control type={"text"} onChange={this.props.onChange}/>
             </Form.Group>
         );
     }

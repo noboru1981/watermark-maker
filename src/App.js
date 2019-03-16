@@ -7,11 +7,11 @@ import PositionSelector from "./components/PositionSelector";
 import FontSelector from "./components/FontSelector";
 
 /**
- *
+ * アプリケーション
  */
 class App extends Component {
     /**
-     *
+     * constructor
      * @param props
      */
     constructor(props) {
@@ -22,15 +22,19 @@ class App extends Component {
                 height: 0,
                 width: 0
             },
-            fontFace: "serif"
+            fontFace: "YuMincho",
+            text: "",
+            position: 5
         };
 
         this.fileChangeHandler = this.fileChangeHandler.bind(this);
         this.fontChangeHandler = this.fontChangeHandler.bind(this);
+        this.textChangeHandler = this.textChangeHandler.bind(this);
+        this.positionChangeHandler = this.positionChangeHandler.bind(this);
     }
 
     /**
-     *
+     * ファイル変更
      * @param event
      */
     fileChangeHandler(event) {
@@ -96,6 +100,36 @@ class App extends Component {
     }
 
     /**
+     * テキスト変更
+     * @param event
+     */
+    textChangeHandler(event) {
+        const text = event.target.value;
+        this.setState(currentState => {
+            const newState = currentState;
+            newState.text = text;
+            return newState;
+        });
+    }
+
+    /**
+     * 位置変更
+     * @param event
+     */
+    positionChangeHandler(event) {
+        event.preventDefault();
+        event.stopPropagation();
+
+        const positionNumber = Number(event.target.value);
+
+        this.setState(currentState => {
+            const newState = currentState;
+            newState.position = positionNumber;
+            return newState;
+        });
+    }
+
+    /**
      * render
      * @returns {*}
      */
@@ -106,25 +140,28 @@ class App extends Component {
                     <Col>
                         <DrawArea image={this.state.file}
                                   width={this.state.imgSize.width}
-                                  height={this.state.imgSize.height}/>
+                                  renderText={this.state.text}
+                                  font={this.state.fontFace}
+                                  position={this.state.position}
+                                  height={this.state.imgSize.height} />
                     </Col>
                     <Col>
                         <Row>
                             <Col>
-                                <FileSelector onChange={this.fileChangeHandler}/>
+                                <FileSelector onChange={this.fileChangeHandler} />
                             </Col>
                         </Row>
                         <Row>
                             <Col>
-                                <TextInput/>
+                                <TextInput onChange={this.textChangeHandler} />
                             </Col>
                         </Row>
                         <Row>
                             <Col>
-                                <PositionSelector/>
+                                <PositionSelector onChange={this.positionChangeHandler} />
                             </Col>
                         </Row>
-                        <FontSelector onChange={this.fontChangeHandler}/>
+                        <FontSelector onChange={this.fontChangeHandler} />
                     </Col>
                 </Row>
             </Container>

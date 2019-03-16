@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {InputGroup, Form, FormControl, Button} from "react-bootstrap";
+import {InputGroup, Form, Button} from "react-bootstrap";
 
 /**
  * ファイルセレクタ
@@ -64,7 +64,6 @@ class FileSelector extends Component {
         return (
             <div>
                 <Form.Control type="file"
-                              id="fileSelector"
                               name={"fileSelector"}
                               onChange={this.fileChangeHandler}
                               ref={this.file}
@@ -77,12 +76,11 @@ class FileSelector extends Component {
                             <Button id={"selectButton"}
                                     ref={this.button}>Select Image</Button>
                         </InputGroup.Prepend>
-                        <FormControl aria-describedby="basic-addon1"
-                                     id={"filename"}
-                                     ref={this.fileName}
-                                     readOnly={true}
-                                     onClick={this.fileSelectHandler}
-                                     value={this.state.fileName}
+                        <Form.Control aria-describedby="basic-addon1"
+                                      ref={this.fileName}
+                                      readOnly={true}
+                                      onClick={this.fileSelectHandler}
+                                      value={this.state.fileName}
                         />
                     </InputGroup>
                 </Form.Group>
