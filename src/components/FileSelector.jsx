@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {InputGroup, Form, Button} from "react-bootstrap";
+import {Button, Form, InputGroup} from "react-bootstrap";
 
 /**
  * ファイルセレクタ
@@ -71,7 +71,9 @@ class FileSelector extends Component {
                 />
                 <Form.Group controlId="formFileSelect">
                     <Form.Label>画像ファイル</Form.Label>
-                    <InputGroup as={"label"} htmlFor={"fileSelector"} className="mb-3">
+                    <InputGroup as={"label"}
+                                htmlFor={"fileSelector"}
+                                className="mb-3">
                         <InputGroup.Prepend onClick={this.fileSelectHandler}>
                             <Button id={"selectButton"}
                                     ref={this.button}>Select Image</Button>

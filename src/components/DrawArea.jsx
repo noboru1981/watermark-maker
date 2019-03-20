@@ -121,11 +121,12 @@ class DrawArea extends Component {
      */
     render() {
         return (
-            <label ref={this.label} htmlFor="fileSelector">
+            <label ref={this.label}
+                   htmlFor="fileSelector">
                 <canvas ref={this.canvas}
                         style={canvasStyle}
                         width={this.props.width}
-                        height={this.props.height}/>
+                        height={this.props.height} />
             </label>
         );
     }

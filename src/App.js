@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {Container, Row, Col} from "react-bootstrap";
+import {Col, Container, Row} from "react-bootstrap";
 import DrawArea from "./components/DrawArea";
 import FileSelector from "./components/FileSelector";
 import TextInput from "./components/TextInput";

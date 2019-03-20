@@ -16,7 +16,8 @@ class FontSelector extends Component {
     render() {
         return (
             <select onChange={this.props.onChange}>
-                {fonts.map((r, k) => <option value={r.value} key={k}>{r.label}</option>)}
+                {fonts.map((r, k) => <option value={r.value}
+                                             key={k}>{r.label}</option>)}
             </select>
         );
     }

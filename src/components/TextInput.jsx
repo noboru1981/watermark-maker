@@ -10,7 +10,8 @@ class TextInput extends Component {
         return (
             <Form.Group controlId="formTextInput">
                 <Form.Label>表示するテキスト</Form.Label>
-                <Form.Control type={"text"} onChange={this.props.onChange}/>
+                <Form.Control type={"text"}
+                              onChange={this.props.onChange} />
             </Form.Group>
         );
     }
